@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Tiferet Salud",
+    "slug": "tiferet-salud",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1E50A2"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.tiferetsalud.erp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1E50A2"
+      },
+      "package": "com.tiferetsalud.erp"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-camera",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Tiferet necesita tu ubicación para registrar entregas."
+        }
+      ]
+    ],
+    "scheme": "tiferet"
+  }
+}
