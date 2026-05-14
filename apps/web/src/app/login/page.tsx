@@ -16,14 +16,28 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    try {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-    if (error) {
-      setError('Correo o contraseña incorrectos')
+      if (!supabaseUrl || !supabaseKey) {
+        setError('Error de configuración: variables de entorno no disponibles')
+        setLoading(false)
+        return
+      }
+
+      const supabase = createClient()
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+      if (error) {
+        setError(`Error: ${error.message}`)
+        setLoading(false)
+      } else {
+        window.location.href = '/dashboard'
+      }
+    } catch (err: any) {
+      setError(`Error inesperado: ${err?.message ?? 'desconocido'}`)
       setLoading(false)
-    } else {
-      window.location.href = '/dashboard'
     }
   }
 
