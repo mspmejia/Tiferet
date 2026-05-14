@@ -123,20 +123,4 @@ export default function LoginPage() {
               type="submit"
               disabled={loading}
               className="w-full h-12 rounded-xl text-white text-sm font-semibold transition disabled:opacity-60"
-              style={{ backgroundColor: '#1E50A2' }}
-            >
-              {loading ? 'Ingresando...' : 'Entrar'}
-            </button>
-          </form>
-
-          <p className="text-center mt-6 text-xs text-gray-400">
-            ¿Necesitás acceso?{' '}
-            <a href="mailto:admin@tiferetsalud.com" className="text-blue-600 hover:underline">
-              Contactá al administrador
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  )
-}
+              style={{ backgroundColor: '#1E

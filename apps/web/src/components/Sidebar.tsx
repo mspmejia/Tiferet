@@ -6,13 +6,14 @@ import { createClient } from '@/lib/supabase/client'
 import type { Usuario } from '@tiferet/types'
 
 const NAV = [
-  { href: '/dashboard',             label: 'Inicio',      icon: '⊞' },
-  { href: '/dashboard/pedidos',     label: 'Pedidos',     icon: '+' },
-  { href: '/dashboard/clientes',    label: 'Clientes',    icon: '●' },
-  { href: '/dashboard/inventario',  label: 'Inventario',  icon: '#' },
-  { href: '/dashboard/entregas',    label: 'Entregas',    icon: '→' },
-  { href: '/dashboard/cobros',      label: 'Cobros',      icon: '$' },
-  { href: '/dashboard/reportes',    label: 'Reportes',    icon: '≡' },
+  { href: '/dashboard',              label: 'Inicio',       icon: '⊞' },
+  { href: '/dashboard/pedidos',      label: 'Pedidos',      icon: '+' },
+  { href: '/dashboard/clientes',     label: 'Clientes',     icon: '●' },
+  { href: '/dashboard/proveedores',  label: 'Proveedores',  icon: '◈' },
+  { href: '/dashboard/inventario',   label: 'Inventario',   icon: '#' },
+  { href: '/dashboard/entregas',     label: 'Entregas',     icon: '→' },
+  { href: '/dashboard/cobros',       label: 'Cobros',       icon: '$' },
+  { href: '/dashboard/reportes',     label: 'Reportes',     icon: '≡' },
 ]
 
 interface SidebarProps {
@@ -84,9 +85,4 @@ export function Sidebar({ perfil }: SidebarProps) {
             </p>
             <p className="text-xs text-gray-400 capitalize">{perfil?.rol ?? ''}</p>
           </div>
-          <span className="text-gray-300 text-xs">↩</span>
-        </div>
-      </div>
-    </aside>
-  )
-}
+          <span cla
