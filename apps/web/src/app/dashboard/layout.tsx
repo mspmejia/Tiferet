@@ -19,4 +19,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <div className="flex h-screen bg-gray-50">
         <Sidebar perfil={perfil} />
         <main className="flex-1 overflow-auto">
-          {childre
+          {children}
+        </main>
+      </div>
+    )
+  } catch {
+    redirect('/login')
+  }
+}
