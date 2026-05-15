@@ -99,4 +99,51 @@ export default function EntregasPage() {
                 <th className="text-left px-6 py-3">Pedido</th>
                 <th className="text-left px-6 py-3">Cliente</th>
                 <th className="text-left px-6 py-3">Repartidor</th>
-                <th 
+                <th className="text-left px-6 py-3">Estado</th>
+                <th className="text-left px-6 py-3">Programada</th>
+                <th className="text-left px-6 py-3">Entregada</th>
+                <th className="text-left px-6 py-3">Cambiar estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtradas.map(e => (
+                <tr key={e.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 font-mono text-gray-700">{e.pedidos?.numero ?? '—'}</td>
+                  <td className="px-6 py-4 text-gray-900">{e.pedidos?.clientes?.nombre ?? '—'}</td>
+                  <td className="px-6 py-4 text-gray-500">
+                    {e.usuarios ? `${e.usuarios.nombre} ${e.usuarios.apellido}` : '—'}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-medium capitalize ${ESTADO_COLOR[e.estado] ?? 'bg-gray-100 text-gray-600'}`}>
+                      {e.estado.replace('_', ' ')}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-gray-400">
+                    {new Date(e.fecha_programada).toLocaleDateString('es-GT')}
+                  </td>
+                  <td className="px-6 py-4 text-gray-400">
+                    {e.fecha_entrega
+                      ? new Date(e.fecha_entrega).toLocaleDateString('es-GT')
+                      : '—'}
+                  </td>
+                  <td className="px-6 py-3">
+                    <select
+                      className="px-2 py-1.5 border border-gray-200 rounded-lg text-xs focus:outline-none"
+                      value={e.estado}
+                      disabled={actualizando === e.id}
+                      onChange={ev => cambiarEstado(e.id, ev.target.value)}
+                    >
+                      {ESTADOS_OPCIONES.map(est => (
+                        <option key={est} value={est}>{est.replace('_', ' ')}</option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  )
+}

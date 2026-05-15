@@ -87,4 +87,78 @@ export default function ClientesPage() {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">Zona *</label>
-                <input cla
+                <input className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm" value={form.zona} onChange={e => setForm({ ...form, zona: e.target.value })} placeholder="Zona 1" />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Teléfono</label>
+                <input className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm" value={form.telefono} onChange={e => setForm({ ...form, telefono: e.target.value })} placeholder="2233-4455" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Límite de crédito (Q)</label>
+                <input type="number" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm" value={form.limite_credito} onChange={e => setForm({ ...form, limite_credito: e.target.value })} />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Días de crédito</label>
+                <input type="number" className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm" value={form.dias_credito} onChange={e => setForm({ ...form, dias_credito: e.target.value })} />
+              </div>
+            </div>
+            <div className="flex gap-3 pt-2">
+              <button onClick={() => setShowModal(false)} className="flex-1 py-2 rounded-xl border border-gray-200 text-sm text-gray-600">Cancelar</button>
+              <button onClick={handleGuardar} disabled={saving} className="flex-1 py-2 rounded-xl text-white text-sm font-medium disabled:opacity-60" style={{ backgroundColor: '#1E50A2' }}>
+                {saving ? 'Guardando...' : 'Guardar cliente'}
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Clientes</h1>
+          <p className="text-sm text-gray-500 mt-0.5">{clientes.length} clientes activos</p>
+        </div>
+        <button onClick={() => setShowModal(true)} className="px-4 py-2 rounded-xl text-sm font-medium text-white" style={{ backgroundColor: '#1E50A2' }}>
+          + Nuevo cliente
+        </button>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        <div className="p-4 border-b border-gray-100">
+          <input type="text" placeholder="Buscar por nombre o zona..." value={busqueda} onChange={e => setBusqueda(e.target.value)} className="w-full px-4 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none" />
+        </div>
+        {loading ? (
+          <div className="p-12 text-center text-gray-400 text-sm">Cargando...</div>
+        ) : filtrados.length === 0 ? (
+          <div className="p-12 text-center text-gray-400 text-sm">Sin clientes todavía</div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-100 text-xs text-gray-400 uppercase tracking-wide">
+                <th className="text-left px-6 py-3">Nombre</th>
+                <th className="text-left px-6 py-3">NIT</th>
+                <th className="text-left px-6 py-3">Zona</th>
+                <th className="text-left px-6 py-3">Tipo</th>
+                <th className="text-left px-6 py-3">Teléfono</th>
+                <th className="text-right px-6 py-3">Límite crédito</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtrados.map(c => (
+                <tr key={c.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 font-medium text-gray-900">{c.nombre}</td>
+                  <td className="px-6 py-4 text-gray-500">{c.nit ?? '—'}</td>
+                  <td className="px-6 py-4 text-gray-700">{c.zona}</td>
+                  <td className="px-6 py-4"><span className="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 capitalize">{c.tipo}</span></td>
+                  <td className="px-6 py-4 text-gray-500">{c.telefono ?? '—'}</td>
+                  <td className="px-6 py-4 text-right text-gray-700">Q{c.limite_credito.toLocaleString('es-GT', { minimumFractionDigits: 2 })}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  )
+}

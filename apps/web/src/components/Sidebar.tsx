@@ -85,4 +85,9 @@ export function Sidebar({ perfil }: SidebarProps) {
             </p>
             <p className="text-xs text-gray-400 capitalize">{perfil?.rol ?? ''}</p>
           </div>
-          <span cla
+          <span className="text-gray-300 text-xs">↩</span>
+        </div>
+      </div>
+    </aside>
+  )
+}
